@@ -1,0 +1,16 @@
+En cas d'erreur : Too few arguments to function PHPStan\PhpDocParser\Parser\ConstExprParser::  
+__construct(), 0 passed in /app/skeleton/vendor/symfony/property-info/Extra  
+ctor/PhpStanExtractor.php on line 67 and exactly 1 expected
+
+SOLUTIONS:
+
+Allez manuellement dans le fichier composer.json puis rechercher les lignes:
+        "phpdocumentor/reflection-docblock": "^5.3",
+        "phpstan/phpdoc-parser": "1.2",
+
+Vérifier d'avoir les bonnes versions, sinon modifier manuellement puis aller dans votre console et écrivez :
+- Remove-Item -Recurse -Force .\vendor\
+- Remove-Item .\composer.lock
+- composer install
+
+Et voilà vous pouvez relancer votre projet.

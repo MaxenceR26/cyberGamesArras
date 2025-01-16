@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Machines{% endblock %}
+
+{% block body %}
+{% for message in app.flashes('success') %}
+    {% if message %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endif %}
+{% endfor %}
+<h1>CyberGames</h1>
+<div class="container">
+    {% if not machines.items is same as ([]) %}
+    <h1>Les machines</h1>
+    <div class="count">
+        {{ machines.getTotalItemCount }}
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Jeux</th>
+            <th scope="col">Adresse IP</th>
+            <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in machines %}
+                <tr>
+                    <th scope="row">{{m.id}}</th>
+                    <td>{{m.name}}</td>
+                    <td>{{m.games}}</td>
+                    <td>{{m.address}}</td>
+                    <td>{{m.createdAt|date('d/m/y')}}</td>
+                </tr>
+            {% endfor %}
+            
+        </tbody>
+    </table>
+    <div class="navigation d-flex justify-content-center">
+        {{ knp_pagination_render(machines, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
+    </div>
+    {% else %}
+    <h2>Il n'y a pas de machines créées.</h2>
+    {% endif %}
+    
+</div>
+
+{% endblock %}
