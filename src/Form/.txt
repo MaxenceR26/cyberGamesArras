@@ -14,3 +14,8 @@ Vérifier d'avoir les bonnes versions, sinon modifier manuellement puis aller da
 - composer install
 
 Et voilà vous pouvez relancer votre projet.
+
+
+
+Erreur autowrite
+composer require sensio/framework-extra-bundle

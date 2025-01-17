@@ -25,6 +25,8 @@
             <th scope="col">Jeux</th>
             <th scope="col">Adresse IP</th>
             <th scope="col">Date</th>
+            <th scope="col">Edition</th>
+            <th scope="col">Suppression</th>
             </tr>
         </thead>
         <tbody>
@@ -35,11 +37,13 @@
                     <td>{{m.games}}</td>
                     <td>{{m.address}}</td>
                     <td>{{m.createdAt|date('d/m/y')}}</td>
+                    <td><a href="{{ path('machines.edit', {id: m.id})}}" class="btn btn-primary">Modifier<a></td>
+                    <td><a href="{{ path('machines.delete', {id: m.id})}}" class="btn btn-danger" onclick="return confirm('Es-tu sur?')">Supprimer<a></td>
                 </tr>
             {% endfor %}
-            
         </tbody>
     </table>
+    <a href="{{path('machines.new')}}" class="btn btn-primary">Référencer une machine</a>
     <div class="navigation d-flex justify-content-center">
         {{ knp_pagination_render(machines, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
     </div>

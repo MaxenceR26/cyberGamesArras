@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+{% block stylesheet %}
+<style>
+.grid-data {
+    width: 150px; 
+    height:150px; 
+    margin:35px;
+    color: white;
+    font-weight:bold;
+}
+</style>
+{% endblock %}
+<div class="container">
+  <div class="row">
+    {% for m in machines %}
+        <div class="col-8 bg-primary d-flex justify-content-center grid-data flex-column">
+            <p>{{m.name}}</p>
+            <p>{{m.games}}</p>
+            <a href=""></a>
+        </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

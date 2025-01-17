@@ -51,4 +51,47 @@ class MachinesController extends AbstractController
             'form'=>$form->createView()
         ]);
     }
+
+    #[Route('/machines/edit/{id}', 'machines.edit', methods: ['GET', 'POST'])]
+    public function edit(Machines $machines, Request $request, EntityManagerInterface $manager): Response {
+        $form = $this->createForm(MachinesType::class, $machines);
+
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $machines = $form->getData();
+            $manager->persist($machines);
+            $manager->flush();
+            
+            $this->addFlash(
+                'success',
+                'Machines modifié avec succès'
+        );
+
+            return $this->redirectToRoute('machines.index');
+        }
+
+        return $this->render('pages/machines/edit.html.twig', [
+            'form'=>$form->createView()
+        ]);
+    }
+
+    #[Route('/machines/delete/{id}', 'machines.delete', methods: ['GET'])]
+    public function delete(Machines $machines, EntityManagerInterface $manager): Response {
+        
+        if (!$machines) {
+            $this->addFlash(
+                'warning',
+                'La machine n\'existe pas'
+            );
+        } else {
+            $this->addFlash(
+                'success',
+                'Machines supprimé avec succès'
+            );
+            $manager->remove($machines);
+            $manager->flush();
+        }
+        return $this->redirectToRoute('machines.index');              
+    }
 }
