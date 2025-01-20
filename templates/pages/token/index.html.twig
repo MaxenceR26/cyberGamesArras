@@ -1,0 +1,36 @@
+{% extends "base.html.twig" %}
+{% block body %}
+<h1>CyberGames</h1>
+<div class="container">
+    {% if not tokens.items is same as ([]) %}
+    <h1>Les token</h1>
+    <div class="count">
+        {{ tokens.getTotalItemCount }}
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">Tokens</th>
+            <th scope="col">Heures</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for token in tokens %}
+                <tr>
+                    <th scope="row">{{token.id}}</th>
+                    <td>{{token.token}}</td>
+                    <td>{{token.hours|date('h:m:s')}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="navigation d-flex justify-content-center">
+        {{ knp_pagination_render(tokens, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
+    </div>
+    {% else %}
+    <h2>Il n'y a pas de token créées.</h2>
+    {% endif %}
+    
+</div>
+{% endblock %}

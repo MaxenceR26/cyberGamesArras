@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Machines;
+use App\Entity\Token;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -17,17 +17,15 @@ class AppFixtures extends Fixture
 
     public function __construct()
     {
-        $this->faker = Factory::create('fr_FR');
+        $this->faker = Factory::create('en_US');
     }
 
     public function load(ObjectManager $manager): void
     {
-        for ($i=0;$i <= 49; $i++) { 
-            $machines = new Machines();
-            $machines->setName($this->faker->word())
-                ->setGames('Jeux ' . $i)
-                ->setAddress('192.168.1.' . $i);
-                $manager->persist($machines);
+        for ($i=0;$i <= 20; $i++) { 
+            $machines = new Token();
+            $machines->setToken($this->faker->phoneNumberWithExtension());
+            $manager->persist($machines);
         }
 
         $manager->flush();

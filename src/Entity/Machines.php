@@ -35,12 +35,16 @@ class Machines
     #[Assert\NotNull()]
     private ?\DateTimeImmutable $createdAt;
 
+    #[ORM\Column]
+    private ?bool $state = null;
+
     /*
     * Constructor
     */
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->state = 0;
     }
 
     public function getId(): ?int
@@ -92,6 +96,18 @@ class Machines
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isState(): ?bool
+    {
+        return $this->state;
+    }
+
+    public function setState(bool $state): static
+    {
+        $this->state = $state;
 
         return $this;
     }

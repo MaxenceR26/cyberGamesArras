@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Machines;
+use App\Entity\Token;
 use App\Form\MachinesType;
 use App\Repository\MachinesRepository;
+use App\Repository\TokenRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -93,5 +95,33 @@ class MachinesController extends AbstractController
             $manager->flush();
         }
         return $this->redirectToRoute('machines.index');              
+    }
+
+    #[Route('/machines/reservation/{id}', 'machines.reservation', methods: ['GET', 'POST'])]
+    public function reservation(EntityManagerInterface $manager, Machines $machine, $id, TokenRepository $repositoryToken): Response {
+        if (!$repositoryToken->findOneBy(["machineId"=>$id])) {
+            $machine->setState(1);
+            $manager->persist($machine);
+    
+            $token = new Token();
+            $token->setToken(bin2hex(random_bytes(60)))
+                  ->setMachineId($id);
+            $manager->persist($token);
+            $manager->flush();
+        }  
+
+        return $this->redirectToRoute('home.index');  
+    }
+
+    #[Route('/machines/cancelation/{id}', 'machines.cancelation', methods: ['GET', 'POST'])]
+    public function cancelation(EntityManagerInterface $manager, Machines $machine, TokenRepository $repositoryToken, $id): Response {
+        $machine->setState(0);
+        $manager->persist($machine);
+
+        $token = $repositoryToken->findOneBy(['machineId' => $id]);
+        $manager->remove($token);
+        $manager->flush();
+
+        return $this->redirectToRoute('machines.index');  
     }
 }

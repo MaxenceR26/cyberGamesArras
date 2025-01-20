@@ -27,6 +27,7 @@
             <th scope="col">Date</th>
             <th scope="col">Edition</th>
             <th scope="col">Suppression</th>
+            <th scope="col">Reservation</th>
             </tr>
         </thead>
         <tbody>
@@ -39,6 +40,12 @@
                     <td>{{m.createdAt|date('d/m/y')}}</td>
                     <td><a href="{{ path('machines.edit', {id: m.id})}}" class="btn btn-primary">Modifier<a></td>
                     <td><a href="{{ path('machines.delete', {id: m.id})}}" class="btn btn-danger" onclick="return confirm('Es-tu sur?')">Supprimer<a></td>
+                    {% if m.state != 1 %}
+                        <td>Disponible</td>
+                    {% else %}
+                        <td><a href="{{ path('machines.cancelation', {id: m.id})}}" class="btn btn-danger" onclick="return confirm('Es-tu sur?')">Annuler<a></td>
+                    {% endif %}
+                    
                 </tr>
             {% endfor %}
         </tbody>
