@@ -15,15 +15,19 @@
 <div class="container">
 <h1>Réservations</h1>
   <div class="row">
+  {% if machines %}
     {% for machine in machines %}
-        {% if machine.state != 1 %}
-            <div class="col-8 bg-primary d-flex justify-content-center grid-data flex-column">
-                <p>{{machine.name}}</p>
-                <p>{{machine.games}}</p>
-                <a href="{{path('machines.reservation', {id: machine.id})}}" class="btn btn-info">Réserver</a>
-            </div>
-        {% endif %}
+          {% if machine.state != 1 %}
+              <div class="col-8 bg-primary d-flex justify-content-center grid-data flex-column">
+                  <p>{{machine.name}}</p>
+                  <p>{{machine.games}}</p>
+                  <a href="{{path('machines.reservation', {id: machine.id})}}" class="btn btn-info">Réserver</a>
+              </div>
+          {% endif %}
     {% endfor %}
+  {% else %}
+    <p>Il n'y a pas de machine disponible</p>
+  {% endif %}
   </div>
 </div>
 
