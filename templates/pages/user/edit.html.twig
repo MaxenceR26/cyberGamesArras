@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    {% for message in app.flashes('warning') %}
+        {% if message %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+    <h1>Modification de vos paramètre utilisateur</h1>
+    {{form(form)}}
+</div>
+{% endblock %}
