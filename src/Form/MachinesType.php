@@ -60,11 +60,38 @@ class MachinesType extends AbstractType
                     new Assert\NotBlank()
                 ]
             ])
+            ->add('price', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                ],
+                'label' => 'Prix',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+                'constraints' => [
+                    new Assert\NotBlank()
+                ]
+            ])
+            ->add('compatibility', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlength' => '2',
+                    'maxlength' => '255',
+                ],
+                'label' => 'Compatibilité',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 255]),
+                    new Assert\NotBlank()
+                ]
+            ])
         ->add('submit', SubmitType::class, [
             'attr' => [
-                'class' => 'btn btn-primary mt-4',
+                'class' => 'btn btn-primary mt-4 bg-danger border-0',
             ],
-            'label' => 'Ajouter ma machine',
+            'label' => 'Ajouter la machine',
         ]);
     }
 

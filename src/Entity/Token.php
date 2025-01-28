@@ -11,7 +11,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Token
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
@@ -39,6 +38,13 @@ class Token
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(string $id): static
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getToken(): ?string

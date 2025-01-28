@@ -1,7 +1,111 @@
 {% extends "base.html.twig" %}
-
+{% block head %}
+<title>Arras games</title>
+<link rel="icon" href="assets/images/icon.ico">
+{% endblock %}
 {% block body %}
-{% block stylesheet %}
+<div class="body_bg">
+{# 
+
+SECTION @HEADER
+
+ #}
+{% include "partials/_header.html.twig" %}
+{# 
+
+SECTION @BANNIERE
+
+ #}
+<section class="banner_part">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-6 col-md-8">
+                <div class="banner_text">
+                    <div class="banner_text_iner">
+                        <h1>Vivez le Gaming au Sommet</h1>
+                        <p>Réservez dès maintenant votre station de jeu et profitez d'une expérience unique grâce à nos équipements dernière génération.</p>
+                        <a href="#" class="btn_1">A propos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{# 
+
+SECTION @APPLICATION
+
+ #}
+<section class="about_us section_padding">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-md-5 col-lg-6 col-xl-6">
+                <div class="learning_img">
+                    <img src="assets/img/about_img.png" alt="">
+                </div>
+            </div>
+            <div class="col-md-7 col-lg-6 col-xl-5">
+                <div class="about_us_text">
+                    <h2>Accédez à votre plateforme de jeux en toute simplicité</h2>
+                    <p>Saisissez votre jeton d’authentification pour déverrouiller l’accès à l’ensemble de votre bibliothèque de jeux. Installez l’application et profitez d’une expérience fluide et sécurisée. </p>
+                    <a href="#" class="btn_1">Installer</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{# 
+
+SECTION @OFFRES
+
+ #}
+<section class="pricing_part padding_top">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section_tittle text-center">
+                    <h2>Nos offres</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            
+            {% if machines %}
+                {% for machine in machines %}
+                    <div class="col-lg-4 col-sm-6 mb-4">
+                        <div class="single_pricing_part h-100">
+                            <h3>{{machine.name}}</h3>
+                            <h4>{{machine.price}} CR</h4>
+                            <ul>
+                                <li>{{machine.games}}</li>
+                                <li>{{machine.compatibility}}</li>
+                                <li>15GB Storage</li>
+                            </ul>
+                            {% if machine.state != 1  %}
+                                <a href="{{path('machines.reservation', {id: machine.id})}}" class="btn_2">Réserver</a>
+                            {% else %}
+                                <a class="btn_2 text-danger">Indisponible</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Il n'y a pas de machine disponible</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{# 
+
+SECTION @FOOTER
+
+ #}
+{% include "partials/_footer.html.twig" %}
+
+
+</div>
+
+{# {% block stylesheet %}
 <style>
 .grid-data {
     width: 150px; 
@@ -11,8 +115,10 @@
     font-weight:bold;
 }
 </style>
-{% endblock %}
-<div class="container">
+{% endblock %} #}
+
+
+{# <div class="container">
 <h1>Réservations</h1>
   <div class="row">
   {% if machines %}
@@ -29,6 +135,6 @@
     <p>Il n'y a pas de machine disponible</p>
   {% endif %}
   </div>
-</div>
+</div> #}
 
 {% endblock %}

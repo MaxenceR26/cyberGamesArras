@@ -4,11 +4,13 @@ namespace App\Controller;
 
 use App\Entity\Machines;
 use App\Entity\Token;
+use App\Entity\User;
 use App\Form\MachinesType;
 use App\Repository\MachinesRepository;
 use App\Repository\TokenRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,12 +19,13 @@ use Symfony\Component\HttpFoundation\Request;
 class MachinesController extends AbstractController
 {
     #[Route('/machines', name: 'machines.index', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function index(MachinesRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
         $machines = $paginator->paginate(
             $repository->findAll(),
             $request->query->getInt('page', 1),
-            10
+            3
         );
         return $this->render('pages/machines/index.html.twig', [
             'machines'=> $machines
@@ -30,6 +33,7 @@ class MachinesController extends AbstractController
     }
 
     #[Route('/machines/new', 'machines.new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, EntityManagerInterface $manager): Response {
 
         $machines = new Machines();
@@ -55,6 +59,7 @@ class MachinesController extends AbstractController
     }
 
     #[Route('/machines/edit/{id}', 'machines.edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Machines $machines, Request $request, EntityManagerInterface $manager): Response {
         $form = $this->createForm(MachinesType::class, $machines);
 
@@ -79,6 +84,7 @@ class MachinesController extends AbstractController
     }
 
     #[Route('/machines/delete/{id}', 'machines.delete', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Machines $machines, EntityManagerInterface $manager): Response {
         
         if (!$machines) {
@@ -97,6 +103,7 @@ class MachinesController extends AbstractController
         return $this->redirectToRoute('machines.index');              
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/machines/reservation/{id}', 'machines.reservation', methods: ['GET', 'POST'])]
     public function reservation(EntityManagerInterface $manager, Machines $machine, $id, TokenRepository $repositoryToken): Response {
         if (!$repositoryToken->findOneBy(["machineId"=>$id])) {
@@ -105,7 +112,8 @@ class MachinesController extends AbstractController
     
             $token = new Token();
             $token->setToken(bin2hex(random_bytes(60)))
-                  ->setMachineId($id);
+                  ->setMachineId($id)
+                  ->setId($this->getUser()->getId());
             $manager->persist($token);
             $manager->flush();
         }  
@@ -114,6 +122,7 @@ class MachinesController extends AbstractController
     }
 
     #[Route('/machines/cancelation/{id}', 'machines.cancelation', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function cancelation(EntityManagerInterface $manager, Machines $machine, TokenRepository $repositoryToken, $id): Response {
         $machine->setState(0);
         $manager->persist($machine);

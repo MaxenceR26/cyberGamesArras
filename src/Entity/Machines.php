@@ -38,6 +38,12 @@ class Machines
     #[ORM\Column]
     private ?bool $state = null;
 
+    #[ORM\Column]
+    private ?float $price = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $compatibility = null;
+
     /*
     * Constructor
     */
@@ -108,6 +114,30 @@ class Machines
     public function setState(bool $state): static
     {
         $this->state = $state;
+
+        return $this;
+    }
+
+    public function getPrice(): ?float
+    {
+        return $this->price;
+    }
+
+    public function setPrice(float $price): static
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    public function getCompatibility(): ?string
+    {
+        return $this->compatibility;
+    }
+
+    public function setCompatibility(string $compatibility): static
+    {
+        $this->compatibility = $compatibility;
 
         return $this;
     }

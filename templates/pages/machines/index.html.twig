@@ -1,63 +1,102 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Machines{% endblock %}
-
+{% block head %}
+<title>Arras games</title>
+<link rel="icon" href="assets/images/icon.ico">
+{% endblock %}
 {% block body %}
-{% for message in app.flashes('success') %}
-    {% if message %}
-        <div class="alert alert-success">
-            {{ message }}
-        </div>
-    {% endif %}
-{% endfor %}
-<h1>CyberGames</h1>
-<div class="container">
-    {% if not machines.items is same as ([]) %}
-    <h1>Les machines</h1>
-    <div class="count">
-        {{ machines.getTotalItemCount }}
-    </div>
-    <table class="table">
-        <thead>
-            <tr>
-            <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Jeux</th>
-            <th scope="col">Adresse IP</th>
-            <th scope="col">Date</th>
-            <th scope="col">Edition</th>
-            <th scope="col">Suppression</th>
-            <th scope="col">Reservation</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for m in machines %}
-                <tr>
-                    <th scope="row">{{m.id}}</th>
-                    <td>{{m.name}}</td>
-                    <td>{{m.games}}</td>
-                    <td>{{m.address}}</td>
-                    <td>{{m.createdAt|date('d/m/y')}}</td>
-                    <td><a href="{{ path('machines.edit', {id: m.id})}}" class="btn btn-primary">Modifier<a></td>
-                    <td><a href="{{ path('machines.delete', {id: m.id})}}" class="btn btn-danger" onclick="return confirm('Es-tu sur?')">Supprimer<a></td>
-                    {% if m.state != 1 %}
-                        <td>Disponible</td>
-                    {% else %}
-                        <td><a href="{{ path('machines.cancelation', {id: m.id})}}" class="btn btn-danger" onclick="return confirm('Es-tu sur?')">Annuler<a></td>
-                    {% endif %}
-                    
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{{path('machines.new')}}" class="btn btn-primary">Référencer une machine</a>
-    <div class="navigation d-flex justify-content-center">
-        {{ knp_pagination_render(machines, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
-    </div>
-    {% else %}
-    <h2>Il n'y a pas de machines créées.</h2>
-    {% endif %}
-    
-</div>
 
+{% block stylesheet %}
+<style>
+.paginator-navigation .page-link {
+    color: #fc4040;  /* Texte rouge */
+    background-color: transparent;  /* Fond transparent */
+}
+
+.paginator-navigation .page-link:hover {
+    color: white;
+    background-color: #fc4040;
+}
+
+.paginator-navigation .page-item.active .page-link {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
+.paginator-navigation .page-item.disabled .page-link {
+    background-color: transparent;
+    color: #fc4040;/
+}
+</style>
+{% endblock %}
+
+<div class="body_bg">
+    {# SECTION @HEADER #}
+    {% include "partials/_header.html.twig" %}
+
+    {# SECTION @BANNIERE #}
+    <section class="banner_part">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-lg-6 col-md-8">
+                    <div class="banner_text">
+                        <div class="banner_text_iner">
+                            <section class="pricing_part padding_top">
+                                <div class="container">
+                                    <div class="row justify-content-center">
+                                        <div class="col-lg-6">
+                                            <div class="section_tittle text-center">
+                                                <h2>Les machines</h2>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-center">
+                                        
+                                        {% if not machines.items is same as ([]) %}
+                                            {% for machine in machines %}
+                                                <div class="col-lg-3 col-sm-6 mb-3">
+                                                        <div class="single_pricing_part mb-3 h-100">
+                                                        <div class="d-flex justify-content-center align-items-center">   
+                                                            <h3 class="m-0 p-0">{{machine.name}}</h3>
+                                                        </div>
+                                                            <ul>
+                                                                <li style="color:white;">{{machine.address}}</li>
+                                                                <li style="color:white;">{{machine.createdAt|date('d/m/y')}}</li>
+                                                                <li style="color:white;">{{machine.price}}</li>
+                                                                {% if machine.state != 1 %}
+                                                                    <li class="text-success">Disponible</li>
+                                                                {% else %}
+                                                                    <li class="text-danger">Indisponible</li>
+                                                                {% endif %}
+                                                            </ul>
+                                                            <a href="{{ path('machines.edit', {id: machine.id}) }}" class="btn_1 mb-3">Modifier</a>
+                                                            <a href="{{ path('machines.delete', {id: machine.id}) }}" class="btn_2 mb-3" onclick="return confirm('Es-tu sur?')">Supprimer</a>
+                                                            {% if machine.state == 1 %}
+                                                                <a href="{{ path('machines.cancelation', {id: machine.id}) }}" class="btn_2" onclick="return confirm('Es-tu sur?')">Annuler</a>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>Il n'y a pas de machine disponible</p>
+                                        {% endif %}
+                                    </div>
+                                    <div class="paginator-navigation d-flex justify-content-center mb-3">
+                                            {{ knp_pagination_render(machines, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
+                                        </div>
+                                    <div class="d-flex justify-content-center">
+                                        <a href="{{ path('machines.new') }}" class="btn btn-success">Référencer une machine</a>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# SECTION @FOOTER #}
+    {% include "partials/_footer.html.twig" %}
+</div>
 {% endblock %}
