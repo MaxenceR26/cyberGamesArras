@@ -18,8 +18,9 @@ class TokenController extends AbstractController
     #[IsGranted('ROLE_ADMIN')]
     public function index(TokenRepository $token, Request $request, PaginatorInterface $paginator): Response
     {
+
         $tokens = $paginator->paginate(
-            $token->findAll(),
+            $token->findBy(['idUser' => $this->getUser()]),
             $request->query->getInt('page', 1),
             10
         );

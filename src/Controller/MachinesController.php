@@ -106,19 +106,32 @@ class MachinesController extends AbstractController
     #[IsGranted('ROLE_USER')]
     #[Route('/machines/reservation/{id}', 'machines.reservation', methods: ['GET', 'POST'])]
     public function reservation(EntityManagerInterface $manager, Machines $machine, $id, TokenRepository $repositoryToken): Response {
-        if (!$repositoryToken->findOneBy(["machineId"=>$id])) {
+        // Vérifier si un token existe déjà pour cette machine et cet utilisateur
+        $existingToken = $repositoryToken->findOneBy(["machineId" => $id, "id" => $this->getUser()->getId()]);
+
+        if (!$existingToken) {
+            do {
+                $newToken = bin2hex(random_bytes(60));
+                $tokenExists = $repositoryToken->findOneBy(["token" => $newToken]);
+            } while ($tokenExists);
             $machine->setState(1);
             $manager->persist($machine);
-    
+
             $token = new Token();
-            $token->setToken(bin2hex(random_bytes(60)))
-                  ->setMachineId($id)
-                  ->setId($this->getUser()->getId());
+            $token->setToken($newToken)
+                ->setMachineId($id)
+                ->setIdUser($this->getUser()->getId());
             $manager->persist($token);
             $manager->flush();
-        }  
+        } else {
+            // Si le token existe déjà, tu peux ajouter une logique pour dire que la machine est déjà réservée
+            // ou simplement ne rien faire.
+            // Par exemple, tu pourrais ajouter un message flash pour indiquer que la réservation est déjà effectuée.
+            $this->addFlash('info', 'Vous avez déjà réservé cette machine.');
+        }
 
-        return $this->redirectToRoute('home.index');  
+        // Rediriger l'utilisateur après la réservation (ou notification si déjà réservé)
+        return $this->redirectToRoute('home.index');
     }
 
     #[Route('/machines/cancelation/{id}', 'machines.cancelation', methods: ['GET', 'POST'])]
