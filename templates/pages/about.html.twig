@@ -22,9 +22,8 @@ SECTION @BANNIERE
             <div class="col-lg-6 col-md-8">
                 <div class="banner_text">
                     <div class="banner_text_iner">
-                        <h1>Vivez le Gaming au Sommet</h1>
-                        <p>Réservez dès maintenant votre station de jeu et profitez d'une expérience unique grâce à nos équipements dernière génération.</p>
-                        <a href="#" class="btn_1">A propos</a>
+                        <h1>Parlons de nous</h1>
+                        <p>Arras Cyber Game, situé au centre de la ville d'arras, existe depuis aujourd'hui 1203 ans</p>
                     </div>
                 </div>
             </div>
@@ -51,55 +50,6 @@ SECTION @APPLICATION
                     <a href="#" class="btn_1">Installer</a>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
-{# 
-
-SECTION @OFFRES
-
- #}
-<section class="pricing_part padding_top" id="pricing_part">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-6">
-                <div class="section_tittle text-center">
-                    <h2>Nos offres</h2>
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            
-            {% if machines %}
-                {% for machine in machines %}
-                    <div class="col-lg-4 col-sm-6 mb-4">
-                        <div class="single_pricing_part h-100">
-                            <h3>{{machine.name}}</h3>
-                            <h4>{{machine.price}} CR</h4>
-                            <ul>
-                                <li>{{machine.games}}</li>
-                                <li>{{machine.compatibility}}</li>
-                                <li>15GB Storage</li>
-                            </ul>
-                            {% if machine.state != 1  %}
-                                {% if app.user %}
-                                    {% if app.user.userCredit|default(0) >= machine.price %}
-                                        <a href="{{path('machines.reservation', {id: machine.id})}}" class="btn_2">Réserver</a>
-                                    {% else %}
-                                        <a href="{{path('credit.index')}}" class="btn_2">Acheter du crédit</a>
-                                    {% endif %}
-                                    {% else %}
-                                        <a href="{{path('security.login')}}" class="btn_2">Se connecter</a>
-                                {% endif %}
-                            {% else %}
-                                <a class="btn_2 text-danger">Indisponible</a>
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <p>Il n'y a pas de machine disponible</p>
-            {% endif %}
         </div>
     </div>
 </section>

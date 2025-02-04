@@ -8,6 +8,10 @@
   background-image: linear-gradient(to left, #fc4040 0%, #fd4c4c 51%, #fc4040 100%);
 }
 
+.btn_3, .live_stareams .live_stareams_slide .live_stareams_slide_img:after, .Latest_War .Latest_War_text:after, .gallery_part .single_gallery_item .single_gallery_item_iner:after, .footer_part .single_footer_part .mail_part .email_icon {
+  background-color: transparent;
+}
+
 /* line 8, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_extends.scss */
 .main_menu .main-menu-item .nav-item a:before {
   background-image: -webkit-gradient(linear, right top, left top, from(#fd4c4c), to(#fc4040));
@@ -632,6 +636,53 @@ ul {
 @media only screen and (min-width: 768px) and (max-width: 991px) {
   /* line 60, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_button.scss */
   .btn_2 {
+    padding: 10px 30px;
+    margin-top: 25px;
+  }
+}
+
+.btn_3 {
+  display: inline-block;
+  padding: 18.5px 40px;
+  border-radius: 0;
+  font-size: 15px;
+  font-family: "Aclonica", sans-serif;
+  font-weight: 500;
+  color: #fff;
+  -o-transition: all .4s ease-in-out;
+  -webkit-transition: all .4s ease-in-out;
+  transition: all .4s ease-in-out;
+  text-transform: capitalize;
+  background-size: 200% auto;
+  border-radius: 10px;  
+  border: 1px solid #ff0000;
+}
+
+/* line 39, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_button.scss */
+.btn_3:hover {
+  color: #fff !important;
+  background-position: right center;
+}
+
+@media (max-width: 576px) {
+  /* line 24, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_button.scss */
+  .btn_3 {
+    padding: 10px 30px;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+  /* line 24, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_button.scss */
+  .btn_3 {
+    padding: 10px 30px;
+    margin-top: 20px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+  /* line 24, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_button.scss */
+  .btn_3 {
     padding: 10px 30px;
     margin-top: 25px;
   }
@@ -2119,6 +2170,11 @@ ul {
   padding: 15px 24px;
 }
 
+.single_sidebar_widget .btn_3 {
+  margin-top: 0px;
+  padding: 15px 24px;
+}
+
 /*============ End Blog Single Styles  =============*/
 /* line 4, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_single_blog.scss */
 .single_blog_post .desc a {
@@ -2500,6 +2556,10 @@ ul {
   .btn_1 {
     margin-top: 0;
   }
+
+  .btn_3 {
+    margin-top: 0;
+  }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px) {
@@ -2531,6 +2591,10 @@ ul {
   }
   /* line 339, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_menu.scss */
   .btn_1 {
+    margin-top: 0;
+  }
+
+  .btn_3 {
     margin-top: 0;
   }
 }
@@ -2685,6 +2749,11 @@ ul {
 @media (max-width: 991px) {
   /* line 68, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_banner.scss */
   .banner_part .banner_text .btn_1 {
+    margin-top: 30px;
+  }
+
+  /* line 68, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_banner.scss */
+  .banner_part .banner_text .btn_3 {
     margin-top: 30px;
   }
 }
@@ -3728,9 +3797,17 @@ ul {
   margin-right: 27px;
 }
 
+.about_us .about_us_text .btn_3 {
+  margin-right: 27px;
+}
+
 @media (max-width: 991px) {
   /* line 60, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_about_us.scss */
   .about_us .about_us_text .btn_1 {
+    margin-right: 10px;
+  }
+
+  .about_us .about_us_text .btn_3 {
     margin-right: 10px;
   }
 }
@@ -3738,6 +3815,10 @@ ul {
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   /* line 60, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_about_us.scss */
   .about_us .about_us_text .btn_1 {
+    margin-right: 10px;
+  }
+
+  .about_us .about_us_text .btn_3 {
     margin-right: 10px;
   }
 }
@@ -4128,8 +4209,19 @@ ul {
   margin-right: 28px;
 }
 
+.cta_part .banner_btn_3 {
+  color: #fc4040;
+  border: 0px solid transparent;
+  margin-right: 28px;
+}
+
 /* line 40, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_cta_part.scss */
 .cta_part .banner_btn_1:hover {
+  background-color: #fc4040 !important;
+  color: #fff;
+}
+
+.cta_part .banner_btn_3:hover {
   background-color: #fc4040 !important;
   color: #fff;
 }
@@ -6075,11 +6167,21 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0px !important;
     margin-top: 0px !important;
   }
+
+  .contact-section .btn_3 {
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+  }
 }
 
 @media only screen and (min-width: 576px) and (max-width: 767px) {
   /* line 127, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_contact.scss */
   .contact-section .btn_1 {
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+  }
+
+  .contact-section .btn_3 {
     margin-bottom: 0px !important;
     margin-top: 0px !important;
   }
@@ -6091,11 +6193,21 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 0px !important;
     margin-top: 0px !important;
   }
+
+  .contact-section .btn_3 {
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+  }
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1200px) {
   /* line 143, ../../01 cl html template/03_jun 2019/186_Gaiming_html/sass/_contact.scss */
   .contact-section .btn_1 {
+    margin-bottom: 0px !important;
+    margin-top: 0px !important;
+  }
+
+  .contact-section .btn_3 {
     margin-bottom: 0px !important;
     margin-top: 0px !important;
   }

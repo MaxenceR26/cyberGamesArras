@@ -45,33 +45,36 @@
                                 <div class="row justify-content-center">
                                     <div class="col-lg-6">
                                         <div class="section_tittle text-center">
-                                            <h2>Mes clés d'activation</h2>
+                                            <h2>Liste des transactions</h2>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
-                                    
-                                    {% if not tokens.items is same as ([]) %}
-                                        {% for token in tokens %}
-                                            <div class="col-lg-3 col-sm-6 mb-3">
-                                                    <div class="single_pricing_part mb-3 h-100">
-                                                    <div class="d-flex justify-content-center align-items-center">   
-                                                        <h3 class="m-0 p-0">{{token.machineName}}</h3>
-                                                    </div>
-                                                        <ul class="text-break">
-                                                        <h2>Clé :</h2>
-                                                            <li id='token{{token.id}}' style="color:white; font-weight: light; font-family: arial">{{token.token}}</li>
-                                                        </ul>
-                                                        <button onclick="copy('token{{token.id}}')" class="btn_2">Copier la clé</button>
-                                                    </div>
-                                                </div>
+                                    <table class="table">
+                                    <thead class="text-danger">
+                                        <tr>
+                                        <th scope="col">Référence</th>
+                                        <th scope="col">Prix</th>
+                                        <th scope="col">Crédit</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col">Statut</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-white">
+                                        {% for transac in transactions %}
+                                            <tr>
+                                                <th scope="row">{{transac.reference}}</th>
+                                                <td>{{transac.totalprice}} €</td>
+                                                <td>{{transac.amountcredit}} CR</td>
+                                                <td>{{transac.date|date('d/m/y')}}</td>
+                                                <td>{{transac.state}}</td>
+                                            </tr>
                                         {% endfor %}
-                                    {% else %}
-                                        <p>Vous n'avez pas de machine réservée.</p>
-                                    {% endif %}
+                                    </tbody>
+                                    </table>                                 
                                 </div>
                                 <div class="paginator-navigation d-flex justify-content-center mb-3">
-                                        {{ knp_pagination_render(tokens, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
+                                        {{ knp_pagination_render(transactions, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
                                     </div>
                             </div>
                         </section>
@@ -84,9 +87,4 @@
     {# SECTION @FOOTER #}
     {% include "partials/_footer.html.twig" %}
 </div>
-<script>
-function copy(id) {
-    var copyText = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(copyText)
-}</script>
 {% endblock %}

@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Machines;
 use App\Entity\Token;
+use App\Repository\MachinesRepository;
 use App\Repository\TokenRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
@@ -14,13 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TokenController extends AbstractController
 {
-    #[Route('/token', name: 'token.index')]
-    #[IsGranted('ROLE_ADMIN')]
-    public function index(TokenRepository $token, Request $request, PaginatorInterface $paginator): Response
+    #[Route('/token', name: 'token.index', methods:"GET")]
+    #[IsGranted('ROLE_USER')]
+    public function index(TokenRepository $repositorytoken, Request $request, PaginatorInterface $paginator): Response
     {
 
         $tokens = $paginator->paginate(
-            $token->findBy(['idUser' => $this->getUser()]),
+            $repositorytoken->findBy(['idUser' => $this->getUser()]),
             $request->query->getInt('page', 1),
             10
         );

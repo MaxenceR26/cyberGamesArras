@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block head %}
+<title>Arras games</title>
+<link rel="icon" href="assets/images/icon.ico">
+{% endblock %}
+{% block body %}
+
+{% block stylesheet %}
+<style>
+.paginator-navigation .page-link {
+    color: #fc4040;  /* Texte rouge */
+    background-color: transparent;  /* Fond transparent */
+}
+
+.paginator-navigation .page-link:hover {
+    color: white;
+    background-color: #fc4040;
+}
+
+.paginator-navigation .page-item.active .page-link {
+    background-color: transparent;
+    color: white;
+    border: 1px solid white;
+}
+.paginator-navigation .page-item.disabled .page-link {
+    background-color: transparent;
+    color: #fc4040;/
+}
+</style>
+{% endblock %}
+
+<div class="body_bg">
+    {# SECTION @HEADER #}
+    {% include "partials/_header.html.twig" %}
+
+    {# SECTION @BANNIERE #}
+    <section class="banner_part">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-between">
+                <div class="banner_text">
+                    <div class="banner_text_iner">
+                        <section class="pricing_part padding_top">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-6">
+                                        <div class="section_tittle text-center">
+                                            <h2>Liste des utilisateurs</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <table class="table">
+                                    <thead class="text-danger">
+                                        <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">E-mail</th>
+                                        <th scope="col">Pseudo</th>
+                                        <th scope="col">Rôles</th>
+                                        <th scope="col">Modifier</th>
+                                        <th scope="col">Supprimer</th>
+                                        <th scope="col">Mode</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-white">
+                                        {% for user in users %}
+                                            <tr>
+                                                <th scope="row">{{user.id}}</th>
+                                                <td>{{user.email}}</td>
+                                                <td>{{user.pseudo}}</td>
+                                                <td>{{user.roles[0]}}</td>
+                                                <td><a href="{{ path('user.edit', {id: user.id}) }}" class="btn_1 mb-3">Modifier</a></td>
+                                                <td><a href="{{ path('user.delete', {id: user.id}) }}" class="btn_2 mb-3" onclick="return confirm('Es-tu sur?')">Supprimer</a></td>
+                                                {% if user.roles[0] != "ROLE_USER" %}
+                                                    <td><a href="{{ path('user.demote', {id: user.id}) }}" class="btn_3" onclick="return confirm('Es-tu sur?')">Basculer en utilisateur</a></td>
+                                                {% else %}
+                                                    <td><a href="{{ path('user.rankup', {id: user.id}) }}" class="btn_3" onclick="return confirm('Es-tu sur?')">Basculer en Administrateur</a></td>
+                                                {% endif %}
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                    </table>                                 
+                                </div>
+                                <div class="paginator-navigation d-flex justify-content-center mb-3">
+                                        {{ knp_pagination_render(users, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
+                                    </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    {# SECTION @FOOTER #}
+    {% include "partials/_footer.html.twig" %}
+</div>
+<script>
+function copy() {
+    var copyText = document.getElementById("token").innerText;
+    navigator.clipboard.writeText(copyText)
+}</script>
+{% endblock %}

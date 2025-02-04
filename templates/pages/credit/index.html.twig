@@ -5,31 +5,6 @@
 <link rel="icon" href="assets/images/icon.ico">
 {% endblock %}
 {% block body %}
-
-{% block stylesheet %}
-<style>
-.paginator-navigation .page-link {
-    color: #fc4040;  /* Texte rouge */
-    background-color: transparent;  /* Fond transparent */
-}
-
-.paginator-navigation .page-link:hover {
-    color: white;
-    background-color: #fc4040;
-}
-
-.paginator-navigation .page-item.active .page-link {
-    background-color: transparent;
-    color: white;
-    border: 1px solid white;
-}
-.paginator-navigation .page-item.disabled .page-link {
-    background-color: transparent;
-    color: #fc4040;/
-}
-</style>
-{% endblock %}
-
 <div class="body_bg">
     {# SECTION @HEADER #}
     {% include "partials/_header.html.twig" %}
@@ -40,39 +15,43 @@
             <div class="row align-items-center justify-content-between">
                 <div class="banner_text">
                     <div class="banner_text_iner">
+                    <div class="container">
+                        {% for message in app.flashes('info') %}
+                            <div class="alert alert-danger d-flex align-items-center justify-content-center">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
                         <section class="pricing_part padding_top">
                             <div class="container">
                                 <div class="row justify-content-center">
                                     <div class="col-lg-6">
                                         <div class="section_tittle text-center">
-                                            <h2>Mes clés d'activation</h2>
+                                            <h2>Boutique</h2>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row justify-content-center">
                                     
-                                    {% if not tokens.items is same as ([]) %}
-                                        {% for token in tokens %}
+                                    {% if not boutique is same as ([]) %}
+                                        {% for boutique in boutique %}
                                             <div class="col-lg-3 col-sm-6 mb-3">
                                                     <div class="single_pricing_part mb-3 h-100">
                                                     <div class="d-flex justify-content-center align-items-center">   
-                                                        <h3 class="m-0 p-0">{{token.machineName}}</h3>
+                                                        <h3 class="m-0 p-0">{{boutique.product}}</h3>
                                                     </div>
-                                                        <ul class="text-break">
-                                                        <h2>Clé :</h2>
-                                                            <li id='token{{token.id}}' style="color:white; font-weight: light; font-family: arial">{{token.token}}</li>
+                                                        <ul>
+                                                            <li style="color:white;">Montant : {{boutique.creditsAmount}} CR</li>
+                                                            <li style="color:white;">Prix : {{boutique.price}} EUR</li>
                                                         </ul>
-                                                        <button onclick="copy('token{{token.id}}')" class="btn_2">Copier la clé</button>
+                                                        <a href="{{path('credit.buy', {id: boutique.id})}}" class="btn_2" onclick="Vous êtes sur le point de réaliser un achat. Etes-vous sur ?">Acheter</a>
                                                     </div>
                                                 </div>
                                         {% endfor %}
                                     {% else %}
-                                        <p>Vous n'avez pas de machine réservée.</p>
+                                        <p>Une erreur est survenue.</p>
                                     {% endif %}
                                 </div>
-                                <div class="paginator-navigation d-flex justify-content-center mb-3">
-                                        {{ knp_pagination_render(tokens, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
-                                    </div>
                             </div>
                         </section>
                     </div>
@@ -84,9 +63,4 @@
     {# SECTION @FOOTER #}
     {% include "partials/_footer.html.twig" %}
 </div>
-<script>
-function copy(id) {
-    var copyText = document.getElementById(id).innerText;
-    navigator.clipboard.writeText(copyText)
-}</script>
 {% endblock %}

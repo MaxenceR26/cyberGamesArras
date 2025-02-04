@@ -1,15 +1,48 @@
-{% extends 'base.html.twig' %}
+{% extends "base.html.twig" %}
+
 
 {% block body %}
-<div class="container">
-    {% for message in app.flashes('warning') %}
-        {% if message %}
-            <div class="alert alert-success">
-                {{ message }}
+<div class="body_bg">
+{# 
+
+SECTION @HEADER
+
+ #}
+{% include "partials/_header.html.twig" %}
+{# 
+
+SECTION @BANNIERE
+
+ #}
+<section class="banner_part">
+    <div class="container">
+        <div class="row align-items-center justify-content-between">
+            <div class="col-lg-6 col-md-8">
+                <div class="banner_text">
+                    <div class="banner_text_iner text-danger">
+                        {% for message in app.flashes('warning') %}
+                            {% if message %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        <h1>Modification de vos paramètre utilisateur</h1>
+                        {{form(form)}}
+                    </div>
+                </div>
             </div>
-        {% endif %}
-    {% endfor %}
-    <h1>Modification de vos paramètre utilisateur</h1>
-    {{form(form)}}
+        </div>
+    </div>
+</section>
+{# 
+
+SECTION @FOOTER
+
+ #}
+{% include "partials/_footer.html.twig" %}
+
+
 </div>
+
 {% endblock %}

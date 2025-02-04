@@ -28,6 +28,9 @@ class Token
     #[ORM\Column]
     private ?int $idUser = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $machine_name = null;
+
     /*
     *
     *  Constructeur
@@ -88,6 +91,18 @@ class Token
     public function setIdUser(int $idUser): static
     {
         $this->idUser = $idUser;
+
+        return $this;
+    }
+
+    public function getMachineName(): ?string
+    {
+        return $this->machine_name;
+    }
+
+    public function setMachineName(string $machine_name): static
+    {
+        $this->machine_name = $machine_name;
 
         return $this;
     }

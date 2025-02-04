@@ -50,7 +50,7 @@ class UserPasswordType extends AbstractType
             ])
             ->add('submit', SubmitType::class, [
                 'attr' => [
-                    'class' => 'btn btn-primary mt-4',
+                    'class' => 'btn btn-primary mt-4 bg-danger border-0',
                 ],
                 'label' => 'Modification des paramètres',
             ]);

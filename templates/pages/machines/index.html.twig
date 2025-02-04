@@ -38,58 +38,56 @@
     <section class="banner_part">
         <div class="container-fluid">
             <div class="row align-items-center justify-content-between">
-                <div class="col-lg-6 col-md-8">
-                    <div class="banner_text">
-                        <div class="banner_text_iner">
-                            <section class="pricing_part padding_top">
-                                <div class="container">
-                                    <div class="row justify-content-center">
-                                        <div class="col-lg-6">
-                                            <div class="section_tittle text-center">
-                                                <h2>Les machines</h2>
-                                            </div>
+                <div class="banner_text">
+                    <div class="banner_text_iner">
+                        <section class="pricing_part padding_top">
+                            <div class="container">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-6">
+                                        <div class="section_tittle text-center">
+                                            <h2>Les machines</h2>
                                         </div>
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        
-                                        {% if not machines.items is same as ([]) %}
-                                            {% for machine in machines %}
-                                                <div class="col-lg-3 col-sm-6 mb-3">
-                                                        <div class="single_pricing_part mb-3 h-100">
-                                                        <div class="d-flex justify-content-center align-items-center">   
-                                                            <h3 class="m-0 p-0">{{machine.name}}</h3>
-                                                        </div>
-                                                            <ul>
-                                                                <li style="color:white;">{{machine.address}}</li>
-                                                                <li style="color:white;">{{machine.createdAt|date('d/m/y')}}</li>
-                                                                <li style="color:white;">{{machine.price}}</li>
-                                                                {% if machine.state != 1 %}
-                                                                    <li class="text-success">Disponible</li>
-                                                                {% else %}
-                                                                    <li class="text-danger">Indisponible</li>
-                                                                {% endif %}
-                                                            </ul>
-                                                            <a href="{{ path('machines.edit', {id: machine.id}) }}" class="btn_1 mb-3">Modifier</a>
-                                                            <a href="{{ path('machines.delete', {id: machine.id}) }}" class="btn_2 mb-3" onclick="return confirm('Es-tu sur?')">Supprimer</a>
-                                                            {% if machine.state == 1 %}
-                                                                <a href="{{ path('machines.cancelation', {id: machine.id}) }}" class="btn_2" onclick="return confirm('Es-tu sur?')">Annuler</a>
-                                                            {% endif %}
-                                                        </div>
-                                                    </div>
-                                            {% endfor %}
-                                        {% else %}
-                                            <p>Il n'y a pas de machine disponible</p>
-                                        {% endif %}
-                                    </div>
-                                    <div class="paginator-navigation d-flex justify-content-center mb-3">
-                                            {{ knp_pagination_render(machines, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
-                                        </div>
-                                    <div class="d-flex justify-content-center">
-                                        <a href="{{ path('machines.new') }}" class="btn btn-success">Référencer une machine</a>
                                     </div>
                                 </div>
-                            </section>
-                        </div>
+                                <div class="row justify-content-center">
+                                    
+                                    {% if not machines.items is same as ([]) %}
+                                        {% for machine in machines %}
+                                            <div class="col-lg-3 col-sm-6 mb-3">
+                                                    <div class="single_pricing_part mb-3 h-100">
+                                                    <div class="d-flex justify-content-center align-items-center">   
+                                                        <h3 class="m-0 p-0">{{machine.name}}</h3>
+                                                    </div>
+                                                        <ul>
+                                                            <li style="color:white;">{{machine.address}}</li>
+                                                            <li style="color:white;">{{machine.createdAt|date('d/m/y')}}</li>
+                                                            <li style="color:white;">{{machine.price}}</li>
+                                                            {% if machine.state != 1 %}
+                                                                <li class="text-success">Disponible</li>
+                                                            {% else %}
+                                                                <li class="text-danger">Indisponible</li>
+                                                            {% endif %}
+                                                        </ul>
+                                                        <a href="{{ path('machines.edit', {id: machine.id}) }}" class="btn_1 mb-3">Modifier</a>
+                                                        <a href="{{ path('machines.delete', {id: machine.id}) }}" class="btn_2 mb-3" onclick="return confirm('Es-tu sur?')">Supprimer</a>
+                                                        {% if machine.state == 1 %}
+                                                            <a href="{{ path('machines.cancelation', {id: machine.id}) }}" class="btn_2" onclick="return confirm('Es-tu sur?')">Annuler</a>
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>Il n'y a pas de machine disponible</p>
+                                    {% endif %}
+                                </div>
+                                <div class="paginator-navigation d-flex justify-content-center mb-3">
+                                        {{ knp_pagination_render(machines, '@KnpPaginator/Pagination/bootstrap_v5_pagination.html.twig') }}
+                                    </div>
+                                <div class="d-flex justify-content-center">
+                                    <a href="{{ path('machines.new') }}" class="btn btn-success">Référencer une machine</a>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>

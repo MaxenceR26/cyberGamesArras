@@ -53,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $UpdatedAt = null;
 
+    #[ORM\Column]
+    private ?int $user_credit = 0;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
@@ -183,6 +186,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(\DateTimeImmutable $UpdatedAt): static
     {
         $this->UpdatedAt = $UpdatedAt;
+
+        return $this;
+    }
+
+    public function getUserCredit(): ?int
+    {
+        return $this->user_credit;
+    }
+
+    public function setUserCredit(int $user_credit): static
+    {
+        $this->user_credit = $user_credit;
 
         return $this;
     }

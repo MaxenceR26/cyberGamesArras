@@ -3,7 +3,7 @@
       <div class="row align-items-center">
           <div class="col-lg-12">
               <nav class="navbar navbar-expand-lg navbar-light">
-                  <a class="navbar-brand" href="index.html"> <img src="{{ asset('assets/img/logo.png')}}" alt="logo"> </a>
+                  <a class="navbar-brand" href="{{path('home.index')}}"> <img src="{{ asset('assets/img/logo.png')}}" alt="logo"> </a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse"
                       data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                       aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +16,7 @@
                               <a class="nav-link" href="{{ path('home.index') }}">Accueil</a>
                           </li>
                           <li class="nav-item">
-                              <a class="nav-link" href="{{ path('home.index') }}">A propos</a>
+                              <a class="nav-link" href="{{ path('about.index') }}">A propos</a>
                           </li>
                           <li class="nav-item">
                               <a class="nav-link" href="{{ path('home.index') }}#pricing_part">Nos offres</a>
@@ -27,11 +27,23 @@
                                 <a class="nav-link dropdown-toggle font-weight-bold" href="blog.html" id="navbarDropdown1"
                                     role="button" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
-                                    {{app.user.pseudo}}
+                                    {% if app.user.pseudo != NULL %}
+                                        {{app.user.pseudo}}
+                                    {% else %}
+                                        {{app.user.fullName}} 
+                                    {% endif %}
+                                    
+                                    
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
                                     <a class="dropdown-item" href="{{path('user.edit', {id: app.user.id})}}">Paramètre</a>
-                                    <a class="dropdown-item" href="{{path('token.index', {id: app.user.id})}}">Mes machines</a>
+                                    <a class="dropdown-item" href="{{path('token.index')}}">Mes machines</a>
+                                    <a class="dropdown-item" href="{{path('transaction.index')}}">Mes transactions</a>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                    <a class="dropdown-item" href="{{path('machines.index', {id: app.user.id})}}">Liste des machines</a>
+                                    <a class="dropdown-item" href="{{path('user.index')}}">Liste des utilisateurs</a>
+                                    {% endif %}
+                                    <a class="dropdown-item" href="{{path('security.logout')}}">Déconnexion</a>
                                 </div>
                             </li>
                           {% else %}
@@ -39,12 +51,15 @@
                             <a class="nav-link font-weight-bold" href="{{ path('security.login') }}">Connexion</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="{{ path('security.registration') }}">Inscription</a>
+                            <a class="nav-link font-weight-bold" href="{{ path('security.registration') }}">Inscription</a>
                           </li>
                           {% endif %}                          
                       </ul>
                   </div>
-                  <a href="#" class="btn_1 d-none d-sm-block mr-3">Install Now</a>  
+                  <a href="#" class="btn_1 d-none d-sm-block mr-3">Installer</a>
+                  {% if app.user %}
+                  <a href="{{path('credit.index')}}" class="btn_3 d-none d-sm-block ">{{app.user.userCredit}} CR</a>
+                  {% endif %}
               </nav>
           </div>
       </div>

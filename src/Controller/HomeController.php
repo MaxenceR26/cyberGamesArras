@@ -17,4 +17,10 @@ class HomeController extends AbstractController
             'machines'=>$repository->findAll()
         ]);
     }
+
+    #[Route('/about', name:'about.index', methods: ['GET'])]
+    public function about(): Response
+    {
+        return $this->render('pages/about.html.twig');
+    }
 }
