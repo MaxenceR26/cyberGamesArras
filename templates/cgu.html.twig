@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+{% block head %}
+<title>Arras games</title>
+<link rel="icon" href="assets/images/icon.ico">
+{% endblock %}
+{% block body %}
+<div class="body_bg">
+{# 
+
+SECTION @HEADER
+
+ #}
+{% include "partials/_header.html.twig" %}
+{# 
+
+SECTION @BANNIERE
+
+ #}
+<section class="banner_part">
+    <div class="container">
+        <div class="align-items-center justify-content-between">
+            <div class="banner_text">
+                <div class="banner_text_iner">
+                    <h1 class="pt-5 mt-5">Conditions Générales d'Utilisation (CGU)</h1>
+                    
+                    <p>Les présentes Conditions Générales d'Utilisation (CGU) régissent l'accès et l'utilisation du site www.arras-game.fr (le "Site"). En accédant au Site, vous acceptez les termes et conditions ci-dessous.</p>
+
+                    <h3><strong>1. Acceptation des conditions</strong></h3>
+                    <p>En utilisant ce site, vous acceptez de vous conformer à toutes les conditions et obligations des présentes CGU. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser ce Site.</p>
+
+                    <h3><strong>2. Accès au site</strong></h3>
+                    <p>L'accès au Site est libre et gratuit. Cependant, certaines sections du Site peuvent nécessiter une inscription préalable. L'accès au Site peut être suspendu temporairement ou définitivement sans préavis pour des raisons techniques ou autres.</p>
+
+                    <h3><strong>3. Propriété intellectuelle</strong></h3>
+                    <p>Le contenu du Site, y compris les textes, images, graphiques, logos, et autres éléments, est protégé par des droits d'auteur. Toute reproduction, distribution ou modification de ces contenus sans l'autorisation préalable de l'éditeur est interdite.</p>
+
+                    <h3><strong>4. Responsabilités</strong></h3>
+                    <p>L'éditeur du Site s'efforce de fournir des informations précises et à jour. Cependant, il ne peut être tenu responsable des erreurs, omissions ou d'éventuelles interruptions du service.</p>
+
+                    <h3><strong>5. Modification des CGU</strong></h3>
+                    <p>L'éditeur se réserve le droit de modifier ces CGU à tout moment. Toute modification sera mise en ligne sur cette page et prendra effet immédiatement.</p>
+
+                    <h3><strong>6. Loi applicable</strong></h3>
+                    <p>Les présentes CGU sont régies par la loi française. En cas de litige, les tribunaux compétents seront ceux de la juridiction du siège social de l'éditeur.</p>
+
+                    <p>Pour toute question ou demande, veuillez nous contacter via <a href="mailto:contact@arrasgame.fr" class="text-danger">contact@arrasgame.fr</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{# 
+
+SECTION @FOOTER
+
+ #}
+{% include "partials/_footer.html.twig" %}
+
+{% endblock %}

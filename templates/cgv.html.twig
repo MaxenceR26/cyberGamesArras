@@ -1,0 +1,68 @@
+{% extends "base.html.twig" %}
+{% block head %}
+<title>Arras games</title>
+<link rel="icon" href="assets/images/icon.ico">
+{% endblock %}
+{% block body %}
+<div class="body_bg">
+{# 
+
+SECTION @HEADER
+
+ #}
+{% include "partials/_header.html.twig" %}
+{# 
+
+SECTION @BANNIERE
+
+ #}
+<section class="banner_part">
+    <div class="container">
+        <div class="align-items-center justify-content-between">
+            <div class="banner_text">
+                <div class="banner_text_iner">
+                    <h1 class="pt-5 mt-5">Conditions Générales de Vente (CGV)</h1>
+                    
+                    <p>Les présentes Conditions Générales de Vente régissent les ventes des produits ou services proposés sur le site www.arras-game.fr (le "Site"). En passant une commande sur ce Site, vous acceptez les termes et conditions suivantes.</p>
+
+                    <h3><strong>1. Acceptation des conditions</strong></h3>
+                    <p>En validant une commande sur le Site, vous acceptez pleinement et sans réserve les présentes Conditions Générales de Vente.</p>
+
+                    <h3><strong>2. Produits et services</strong></h3>
+                    <p>Les produits et services disponibles sur le Site sont décrits et présentés de manière la plus précise possible. Toutefois, l'éditeur ne peut être tenu responsable des erreurs ou des modifications dans les caractéristiques des produits, notamment en cas de rupture de stock.</p>
+
+                    <h3><strong>3. Commande et paiement</strong></h3>
+                    <p>Le client peut passer commande en ligne via le Site. La commande sera confirmée par l'envoi d'un email. Le paiement est exigible dès la commande. Les modes de paiement acceptés sont : carte bancaire, PayPal, etc.</p>
+
+                    <h3><strong>4. Livraison</strong></h3>
+                    <p>Les produits seront livrés à l'adresse indiquée par le client lors de la commande. Les frais de livraison seront précisés au moment de la commande. L'éditeur ne pourra être tenu responsable des retards de livraison.</p>
+
+                    <h3><strong>5. Droit de rétractation</strong></h3>
+                    <p>Conformément à la législation en vigueur, vous disposez d'un droit de rétractation de 14 jours à compter de la réception des produits, pour retourner les articles à vos frais et obtenir un remboursement.</p>
+
+                    <h3><strong>6. Garanties</strong></h3>
+                    <p>Les produits bénéficient de la garantie légale de conformité et de la garantie contre les vices cachés, selon les conditions prévues par la loi.</p>
+
+                    <h3><strong>7. Protection des données personnelles</strong></h3>
+                    <p>Les informations collectées lors de la commande sont traitées conformément à notre <a href="{{path('conform.polconf')}}" class="text-danger">Politique de confidentialité</a>.</p>
+
+                    <h3><strong>8. Modifications des CGV</strong></h3>
+                    <p>L'éditeur se réserve le droit de modifier ces conditions à tout moment. Les nouvelles conditions seront appliquées dès leur mise en ligne.</p>
+
+                    <h3><strong>9. Loi applicable</strong></h3>
+                    <p>Les présentes CGV sont régies par la loi française. En cas de litige, les tribunaux compétents seront ceux de la juridiction du siège social de l'éditeur.</p>
+
+                    <p>Pour toute question ou réclamation, veuillez nous contacter via <a href="mailto:contact@arrasgame.fr" class="text-danger">contact@arrasgame.fr</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{# 
+
+SECTION @FOOTER
+
+ #}
+{% include "partials/_footer.html.twig" %}
+
+{% endblock %}

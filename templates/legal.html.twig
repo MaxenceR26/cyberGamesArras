@@ -1,0 +1,77 @@
+{% extends "base.html.twig" %}
+{% block head %}
+<title>Arras games</title>
+<link rel="icon" href="assets/images/icon.ico">
+{% endblock %}
+{% block body %}
+<div class="body_bg">
+{# 
+
+SECTION @HEADER
+
+ #}
+{% include "partials/_header.html.twig" %}
+{# 
+
+SECTION @BANNIERE
+
+ #}
+<section class="banner_part">
+    <div class="container">
+        <div class="align-items-center justify-content-between">
+            <div class="banner_text">
+                <div class="banner_text_iner">
+                    <h1 class="pt-5 mt-5">MENTIONS LÉGALES</h1>
+                    <p>Conformément aux dispositions de la loi n° 2004-575 du 21 juin 2004 pour la confiance en l'économie numérique, il est précisé aux utilisateurs du site Arras Cyber Game l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi.</p>
+
+                    <h3><strong>Edition du site</strong></h3>
+
+                    <p>Le présent site, accessible à l’URL <a href="http://www.arras-game.fr" target="_blank"  class="text-danger"><strong>www.arras-game.fr</strong></a> (le « Site »), est édité par :</p>
+
+                    <p>Maxence Rémy, résidant 27 rue d'artois Brebières, de nationalité Française (France), né(e) le 26/12/2004, inscrit(e) au R.C.S. de PARIS sous le numéro RCS VANNES B 514 919 844,</p>
+
+                    <p>Le numéro individuel TVA de l’éditeur est : FR 40 123456789.</p>
+
+                    <h3><strong>Hébergement</strong></h3>
+
+                    <p>Le Site est hébergé par la société Hostinger International LTD, située à (adresse complète manquante), (contact téléphonique ou email : <a href="https://www.hostinger.fr/contact" target="_blank" class="text-danger"><strong>https://www.hostinger.fr/contact</strong></a>).</p>
+
+                    <p><strong>Directeur de publication</strong></p>
+
+                    <p>Le Directeur de la publication du Site est Maxence Rémy.</p>
+
+                    <h3><strong>Nous contacter</strong></h3>
+
+                    <p>Par téléphone : +33142568974</p>
+                    <p>Par email : <a href="mailto:contact@arrasgame.fr" class="text-danger"><strong>contact@arrasgame.fr</strong></a></p>
+                    <p>Par courrier : 27 rue d'artois Brebières</p>
+
+                    <h3><strong>Données personnelles</strong></h3>
+
+                    <p>Le traitement de vos données à caractère personnel est régi par notre Charte du respect de la vie privée, disponible depuis la section <a href="lien_vers_charte_privacy" target="_blank"  class="text-danger"><strong>"Charte de Protection des Données Personnelles"</strong></a>, conformément au Règlement Général sur la Protection des Données 2016/679 du 27 avril 2016 (« RGPD »).</p>
+
+                    <p>a désigné un Délégué à la Protection des Données (DPO) auprès de la CNIL (Désignation N°). Les coordonnées de notre Délégué à la Protection des Données sont les suivantes :</p>
+
+                    <p>Nom : Maxence Rémy</p>
+                    <p>Adresse : 27 rue d'artois 62117 Brebières</p>
+                    <p>Téléphone : +33662394744</p>
+                    <p>Email : <a href="mailto:maxence.remy26@gmail.com" class="text-danger"><strong>maxence.remy26@gmail.com</strong></a></p>
+
+                    <h3><strong>But du site</strong></h3>
+
+                    <p>Ce site est réalisé dans le cadre d’un projet scolaire et n’a aucune vocation commerciale.</p>
+
+                    <p><strong>Génération des mentions légales par <span class="text-danger">Legalstart.</span></strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{# 
+
+SECTION @FOOTER
+
+ #}
+{% include "partials/_footer.html.twig" %}
+
+{% endblock %}

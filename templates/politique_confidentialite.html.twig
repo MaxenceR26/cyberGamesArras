@@ -1,0 +1,62 @@
+{% extends "base.html.twig" %}
+{% block head %}
+<title>Arras games</title>
+<link rel="icon" href="assets/images/icon.ico">
+{% endblock %}
+{% block body %}
+<div class="body_bg">
+{# 
+
+SECTION @HEADER
+
+ #}
+{% include "partials/_header.html.twig" %}
+{# 
+
+SECTION @BANNIERE
+
+ #}
+<section class="banner_part">
+    <div class="container">
+        <div class="align-items-center justify-content-between">
+            <div class="banner_text">
+                <div class="banner_text_iner">
+                    <h1 class="pt-5 mt-5">Politique de confidentialité</h1>
+                    
+                    <p>La protection de vos données personnelles est importante pour nous. La présente politique de confidentialité décrit comment nous collectons, utilisons, partageons et protégeons vos données personnelles lorsque vous utilisez notre site www.arras-game.fr (le "Site").</p>
+
+                    <h3><strong>1. Collecte des données personnelles</strong></h3>
+                    <p>Nous collectons des informations personnelles que vous nous fournissez volontairement, telles que votre nom, adresse e-mail, et toute autre information nécessaire pour l'inscription ou la commande. Nous pouvons également collecter des données techniques, telles que votre adresse IP, votre type de navigateur, et vos préférences de navigation via des cookies.</p>
+
+                    <h3><strong>2. Utilisation des données personnelles</strong></h3>
+                    <p>Nous utilisons vos données personnelles pour vous fournir les services demandés, notamment pour traiter vos commandes, vous envoyer des informations relatives à votre compte, et améliorer votre expérience sur notre site.</p>
+
+                    <h3><strong>3. Partage des données personnelles</strong></h3>
+                    <p>Nous ne vendons ni ne louons vos données personnelles à des tiers. Toutefois, vos données peuvent être partagées avec des prestataires de services tiers dans le cadre de l'exécution de services (par exemple, des services de paiement ou de livraison), sous réserve qu'ils respectent la législation en vigueur sur la protection des données.</p>
+
+                    <h3><strong>4. Sécurité des données</strong></h3>
+                    <p>Nous mettons en place des mesures de sécurité techniques et organisationnelles appropriées pour protéger vos données personnelles contre l'accès, la divulgation, la modification ou la destruction non autorisés.</p>
+
+                    <h3><strong>5. Vos droits</strong></h3>
+                    <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous avez le droit d'accéder à vos données personnelles, de les rectifier, de demander leur effacement ou de vous opposer à leur traitement dans certaines circonstances.</p>
+
+                    <h3><strong>6. Cookies</strong></h3>
+                    <p>Nous utilisons des cookies pour améliorer votre expérience sur notre site. Pour en savoir plus sur les cookies et leur gestion, consultez notre <a href="lien_vers_politique_cookies" class="text-danger">Politique de cookies</a>.</p>
+
+                    <h3><strong>7. Modification de la politique</strong></h3>
+                    <p>Nous nous réservons le droit de modifier cette politique à tout moment. Les modifications seront publiées sur cette page avec une nouvelle date de mise à jour.</p>
+
+                    <p>Pour toute question concernant notre politique de confidentialité, veuillez nous contacter à <a href="mailto:contact@arrasgame.fr" class="text-danger">contact@arrasgame.fr</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{# 
+
+SECTION @FOOTER
+
+ #}
+{% include "partials/_footer.html.twig" %}
+
+{% endblock %}
