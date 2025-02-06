@@ -42,6 +42,16 @@
                     <div class="banner_text_iner">
                         <section class="pricing_part padding_top">
                             <div class="container">
+                            {% for message in app.flashes('success') %}
+                                <div class="alert alert-success">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            {% for message in app.flashes('warning') %}
+                                <div class="alert alert-warning">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
                                 <div class="row justify-content-center">
                                     <div class="col-lg-6">
                                         <div class="section_tittle text-center">
@@ -59,14 +69,23 @@
                                                         <h3 class="m-0 p-0">{{machine.name}}</h3>
                                                     </div>
                                                         <ul>
-                                                            <li style="color:white;">{{machine.address}}</li>
-                                                            <li style="color:white;">{{machine.createdAt|date('d/m/y')}}</li>
-                                                            <li style="color:white;">{{machine.price}}</li>
-                                                            {% if machine.state != 1 %}
-                                                                <li class="text-success">Disponible</li>
+                                                            <li class="text-white">{{machine.address}}</li>
+                                                            <li class="text-white">{{machine.createdAt|date('d/m/y')}}</li>
+                                                            <li class="text-white">{{machine.price}}</li>
+                                                            <li class="text-white">{{machine.storage}}</li>
+                                                            {% if machine.state != 1 and machine.maintenance != 1 %}
+                                                                <li class="text-white"><span class="text-success">Disponible</span></li>
                                                             {% else %}
-                                                                <li class="text-danger">Indisponible</li>
+                                                                {% if machine.maintenance == 1 %}
+                                                                    <li><a href="{{path('machines.maintenance.remove', {id: machine.id})}}" class="text-warning">Retirer de la maintenance</a></li>
+                                                                {% else %}
+                                                                    <li class="text-white"><span class="text-danger">Indisponible</span></li>
+                                                                {% endif %}
                                                             {% endif %}
+                                                            {% if machine.maintenance != 1 and machine.state != 1 %}
+                                                                <li><a href="{{path('machines.maintenance.add', {id: machine.id})}}" class="text-success">Passer en maintenance</a></li>   
+                                                            {% endif %}
+                                                            
                                                         </ul>
                                                         <a href="{{ path('machines.edit', {id: machine.id}) }}" class="btn_1 mb-3">Modifier</a>
                                                         <a href="{{ path('machines.delete', {id: machine.id}) }}" class="btn_2 mb-3" onclick="return confirm('Es-tu sur?')">Supprimer</a>

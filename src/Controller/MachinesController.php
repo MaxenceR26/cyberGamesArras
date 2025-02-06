@@ -103,6 +103,71 @@ class MachinesController extends AbstractController
         return $this->redirectToRoute('machines.index');              
     }
 
+    #[Route('/machines/maintenance/add/{id}', 'machines.maintenance.add', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function add_maintenance(Machines $machines, EntityManagerInterface $manager): Response {
+        if (!$machines) {
+            $this->addFlash(
+                'warning',
+                'La machine n\'existe pas'
+            );
+        } else {
+            if ($machines->isState() != 1) {
+                if ($machines->isMaintenance() != 1) {
+                    $machines->setMaintenance(1);
+                    $manager->persist($machines);
+                    $manager->flush();
+                    $this->addFlash(
+                        'success',
+                        'Maintenance activé pour cette machine'
+                    );
+                }
+                else {
+                    $this->addFlash(
+                        'warning',
+                        'Maintenance déjà activé pour cette machine'
+                    );
+                }
+            } else {
+                $this->addFlash(
+                    'warning',
+                    'Maintenance impossible pour cette machine'
+                );
+            }
+            
+        }
+        return $this->redirectToRoute('machines.index');    
+    }
+
+    #[Route('/machines/maintenance/remove/{id}', 'machines.maintenance.remove', methods: ['GET'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function remove_maintenance(Machines $machines, EntityManagerInterface $manager): Response {
+        if (!$machines) {
+            $this->addFlash(
+                'warning',
+                'La machine n\'existe pas'
+            );
+        } else {
+            if ($machines->isMaintenance() == 1) {
+                $machines->setMaintenance(0);
+                $manager->persist($machines);
+                $manager->flush();
+                $this->addFlash(
+                    'success',
+                    'Maintenance retiré pour cette machine'
+                );
+            }
+            else {
+                $this->addFlash(
+                    'warning',
+                    'La maintenance n\'est pas activé pour cette machine'
+                );
+            }
+            
+        }
+        return $this->redirectToRoute('machines.index');    
+    }
+
     #[IsGranted('ROLE_USER')]
     #[Route('/machines/reservation/{id}', 'machines.reservation', methods: ['GET', 'POST'])]
     public function reservation(EntityManagerInterface $manager, Machines $machine, $id, TokenRepository $repositoryToken): Response {

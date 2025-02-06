@@ -44,6 +44,12 @@ class Machines
     #[ORM\Column(length: 255)]
     private ?string $compatibility = null;
 
+    #[ORM\Column]
+    private ?bool $maintenance = null;
+
+    #[ORM\Column(length: 10)]
+    private ?string $storage = null;
+
     /*
     * Constructor
     */
@@ -138,6 +144,30 @@ class Machines
     public function setCompatibility(string $compatibility): static
     {
         $this->compatibility = $compatibility;
+
+        return $this;
+    }
+
+    public function isMaintenance(): ?bool
+    {
+        return $this->maintenance;
+    }
+
+    public function setMaintenance(bool $maintenance): static
+    {
+        $this->maintenance = $maintenance;
+
+        return $this;
+    }
+
+    public function getStorage(): ?string
+    {
+        return $this->storage;
+    }
+
+    public function setStorage(string $storage): static
+    {
+        $this->storage = $storage;
 
         return $this;
     }

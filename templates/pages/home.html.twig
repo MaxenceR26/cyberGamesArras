@@ -79,9 +79,9 @@ SECTION @OFFRES
                             <ul>
                                 <li>{{machine.games}}</li>
                                 <li>{{machine.compatibility}}</li>
-                                <li>15GB Storage</li>
+                                <li>{{machine.storage}}</li>
                             </ul>
-                            {% if machine.state != 1  %}
+                            {% if machine.state != 1 and machine.maintenance != 1 %}
                                 {% if app.user %}
                                     {% if app.user.userCredit|default(0) >= machine.price %}
                                         <a href="{{path('machines.reservation', {id: machine.id})}}" class="btn_2">Réserver</a>
@@ -92,7 +92,11 @@ SECTION @OFFRES
                                         <a href="{{path('security.login')}}" class="btn_2">Se connecter</a>
                                 {% endif %}
                             {% else %}
-                                <a class="btn_2 text-danger">Indisponible</a>
+                                {% if machine.maintenance == 1 %}
+                                    <h2 class="text-danger">Maintenance en cours...</h4>
+                                {% else %}
+                                    <a class="btn_2 text-danger">Réservée</a>
+                                {% endif %}
                             {% endif %}
                         </div>
                     </div>

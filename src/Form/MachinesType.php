@@ -87,6 +87,21 @@ class MachinesType extends AbstractType
                     new Assert\NotBlank()
                 ]
             ])
+            ->add('storage', TextType::class, [
+                'attr' => [
+                    'class' => 'form-control',
+                    'minlength' => '2',
+                    'maxlength' => '10',
+                ],
+                'label' => 'Stockage',
+                'label_attr' => [
+                    'class' => 'form-label'
+                ],
+                'constraints' => [
+                    new Assert\Length(['min' => 2, 'max' => 10]),
+                    new Assert\NotBlank()
+                ]
+            ])
         ->add('submit', SubmitType::class, [
             'attr' => [
                 'class' => 'btn btn-primary mt-4 bg-danger border-0',
