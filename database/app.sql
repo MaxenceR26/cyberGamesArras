@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : ven. 07 fév. 2025 à 10:43
+-- Généré le : dim. 27 avr. 2025 à 22:44
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -99,9 +99,9 @@ CREATE TABLE IF NOT EXISTS `machines` (
 --
 
 INSERT INTO `machines` (`id`, `name`, `games`, `address`, `created_at`, `state`, `price`, `compatibility`, `maintenance`, `storage`) VALUES
-(275, 'GameMaster', 'Jeux en ligne, eSports, action, plateforme', '192.168.5.3', '2025-01-28 13:26:28', 1, 2000, 'Windows, Xbox, PS5', 0, '500 Go'),
-(276, 'TurboX Elite', 'Jeux de combat, aventure, multi-joueurs', '192.168.5.4', '2025-01-28 13:27:26', 0, 2700, 'Windows 10, Mac, PS4, Xbox One', 0, '500 GO'),
-(277, 'PowerX', 'Jeux AAA, simulation, jeux de rôle, stratégie', '192.168.5.5', '2025-01-28 13:28:22', 0, 3300, 'Windows 10, Mac, Linux', 0, '1 TO'),
+(275, 'GameMaster', 'Jeux en ligne, eSports, action, plateforme', '192.168.5.3', '2025-01-28 13:26:28', 0, 2000, 'Windows, Xbox, PS5', 0, '500 Go'),
+(276, 'TurboX Elite', 'Jeux de combat, aventure, multi-joueurs', '192.168.5.4', '2025-01-28 13:27:26', 0, 2700, 'Windows 10, Mac, PS4, Xbox One', 1, '500 GO'),
+(277, 'PowerX', 'Jeux AAA, simulation, jeux de rôle, stratégie', '192.168.5.5', '2025-01-28 13:28:22', 1, 3300, 'Windows 10, Mac, Linux', 0, '1 TO'),
 (278, 'UltraCore', 'Simulation, open world, FPS', '192.168.5.6', '2025-01-28 13:29:23', 0, 4000, 'Windows 11, Mac', 0, '1 TO'),
 (279, 'VR Titan', 'Réalité virtuelle, jeux d\'aventure', '192.168.5.7', '2025-01-28 13:30:09', 0, 4600, 'Windows 10, Mac, VR supporté', 0, '1 TO'),
 (280, 'QuantumX', 'Open-world, stratégie, action', '192.168.5.8', '2025-01-28 13:30:36', 0, 5300, 'Windows 11, Mac, PS5', 0, '1 TO');
@@ -141,8 +141,10 @@ CREATE TABLE IF NOT EXISTS `token` (
   `machine_id` int NOT NULL,
   `id_user` int NOT NULL,
   `machine_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`),
+  KEY `machine_id` (`machine_id`),
+  KEY `id_user` (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -160,8 +162,9 @@ CREATE TABLE IF NOT EXISTS `transactions` (
   `state` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `reference` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `transactions`
@@ -179,7 +182,16 @@ INSERT INTO `transactions` (`id`, `user_id`, `amount_credit`, `total_price`, `me
 (13, 64, 10600, 49, 'EUR', 'Valide', '2025-02-05 09:14:55', '#ARGAME-b41c20d0c9'),
 (14, 64, 2300, 9, 'EUR', 'Valide', '2025-02-05 14:53:37', '#ARGAME-f295d13397'),
 (15, 64, 10600, 49, 'EUR', 'Valide', '2025-02-05 14:57:33', '#ARGAME-5a5a892f12'),
-(16, 64, 10600, 49, 'EUR', 'Valide', '2025-02-06 10:30:59', '#ARGAME-392c6338a4');
+(16, 64, 10600, 49, 'EUR', 'Valide', '2025-02-06 10:30:59', '#ARGAME-392c6338a4'),
+(17, 64, 4800, 21, 'EUR', 'Valide', '2025-02-07 10:51:25', '#ARGAME-a1744e4976'),
+(18, 64, 10600, 49, 'EUR', 'Valide', '2025-02-23 21:04:28', '#ARGAME-4a6d369e47'),
+(19, 64, 2300, 9, 'EUR', 'Valide', '2025-02-24 08:55:20', '#ARGAME-70f78f1aa7'),
+(20, 64, 10600, 49, 'EUR', 'Valide', '2025-02-24 09:45:03', '#ARGAME-6c6965471e'),
+(21, 64, 10600, 49, 'EUR', 'Valide', '2025-02-26 08:13:39', '#ARGAME-20d65b0ded'),
+(22, 64, 2300, 9, 'EUR', 'Valide', '2025-03-31 08:48:10', '#ARGAME-c609210b65'),
+(23, 64, 10600, 49, 'EUR', 'Valide', '2025-04-15 12:55:24', '#ARGAME-cfe5b12fc4'),
+(24, 64, 10600, 49, 'EUR', 'Valide', '2025-04-15 13:58:43', '#ARGAME-4b3c5462b5'),
+(25, 64, 10600, 49, 'EUR', 'Valide', '2025-04-15 13:58:45', '#ARGAME-91b3fadf27');
 
 -- --------------------------------------------------------
 
@@ -207,7 +219,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `email`, `roles`, `password`, `full_name`, `pseudo`, `created_at`, `updated_at`, `user_credit`) VALUES
-(64, 'zbriand@noos.fr', '[\"ROLE_ADMIN\"]', '$2y$13$AmpCzyfY3lWTg1eU7Ppuz.MSDTCPwVZGbj6AhYL108cv9XzK4MCPS', 'André Lebrun-Godard', 'Bernadette', '2025-01-20 11:14:36', '2025-01-24 10:30:42', 800),
+(64, 'zbriand@noos.fr', '[\"ROLE_ADMIN\"]', '$2y$13$AmpCzyfY3lWTg1eU7Ppuz.MSDTCPwVZGbj6AhYL108cv9XzK4MCPS', 'André Lebrun-Godard', 'Bernadette', '2025-01-20 11:14:36', '2025-01-24 10:30:42', 40400),
 (65, 'picard.eleonore@free.fr', '[\"ROLE_USER\"]', '$2y$13$oTVm.ifm52O2BeTTtkQdfOZWRGXMjkv3MYO0TDxs6iFXIBO5Rr4Ne', 'Juliette-Adélaïde Bazin', 'Yayaya', '2025-01-20 11:14:36', '2025-01-30 09:21:24', 0),
 (66, 'lemoine.emmanuel@diallo.org', '[\"ROLE_USER\"]', '$2y$13$7tMx9hfQdhLTPlKvxkcmKOH11P1WXzPtcY0Oq84g1wq7UJsF/nnqu', 'Olivie de la Mary', 'Margot', '2025-01-20 11:14:36', '0000-00-00 00:00:00', 0),
 (67, 'joubert.adelaide@peron.com', '[\"ROLE_USER\"]', '$2y$13$6iJ.PL6YZSqzqk9g8nhFiem/Dlps4xFU0gKo2pBPP2LlYBhf6z/Ui', 'Luc Laporte', 'Luc', '2025-01-20 11:14:37', '2025-02-03 13:02:23', 0),
@@ -226,7 +238,28 @@ INSERT INTO `user` (`id`, `email`, `roles`, `password`, `full_name`, `pseudo`, `
 (81, 'leclerc.raymond@marion.com', '[\"ROLE_USER\"]', '$2y$13$8FNSFdadGoH.4uMJPA3kvemeykq90dSFTUAowWT7cpXL0QcwQtB06', 'Pierre Bodin-Duhamel', NULL, '2025-01-20 11:14:43', '0000-00-00 00:00:00', 0),
 (82, 'patrick49@tele2.fr', '[\"ROLE_USER\"]', '$2y$13$awh6JiFTdYuBffvQaEcKQO/O8coF27bolvFgU2azfPcGznM0lZFZG', 'Louis Lambert', NULL, '2025-01-20 11:14:43', '0000-00-00 00:00:00', 0),
 (83, 'gmace@daniel.fr', '[\"ROLE_USER\"]', '$2y$13$R1j6rri8/rWDP7jgyCzm3.N2fRU15nVskhr.x.d.fj5tkxGcNDdTy', 'Lucas Leveque', 'Yves', '2025-01-20 11:14:44', '0000-00-00 00:00:00', 0),
-(84, 'lucas.tristan@sfr.fr', '[\"ROLE_USER\"]', '$2y$13$6xo2y4bXRPrk86ujM/Ay5O6iHMdw9S5pvH/PPLDcQPmpflZj2iczO', 'Chantal Le Barre', NULL, '2025-01-20 11:14:44', '0000-00-00 00:00:00', 0);
+(84, 'lucas.tristan@sfr.fr', '[\"ROLE_USER\"]', '$2y$13$6xo2y4bXRPrk86ujM/Ay5O6iHMdw9S5pvH/PPLDcQPmpflZj2iczO', 'Chantal Le Barre', NULL, '2025-01-20 11:14:44', '0000-00-00 00:00:00', 0),
+(85, 'm@m.fr', '[]', 'password', 'm m', NULL, '2025-01-21 09:52:26', '0000-00-00 00:00:00', 0),
+(86, 't@m.fr', '[]', 'password', 't t', NULL, '2025-01-21 09:55:24', '0000-00-00 00:00:00', 0),
+(87, 'aa@a.fr', '[]', '$2y$13$eUOfGRd357JxbgmKR3F3Re/KmYRzYjeZit6StwozDFpwUiXvVVqw.', 't t', NULL, '2025-01-21 10:04:13', '0000-00-00 00:00:00', 0),
+(89, 'maxence.remy26@gmail.com', '[\"ROLE_USER\"]', '$2y$13$U/72Lx6uoiJxvmrbEKkytOyjrbZzxf/H/QIRXMhDtpFxLonD40qsO', 'Maxence Rémy', 'chmax', '2025-02-03 18:10:39', '2025-02-03 18:10:39', 300);
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `token`
+--
+ALTER TABLE `token`
+  ADD CONSTRAINT `token_ibfk_1` FOREIGN KEY (`machine_id`) REFERENCES `machines` (`id`),
+  ADD CONSTRAINT `token_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`);
+
+--
+-- Contraintes pour la table `transactions`
+--
+ALTER TABLE `transactions`
+  ADD CONSTRAINT `transactions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 DELIMITER $$
 --
