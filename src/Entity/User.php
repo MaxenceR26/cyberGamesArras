@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -56,10 +58,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $user_credit = 0;
 
+    #[ORM\OneToMany(targetEntity: HistoriqueMaintenance::class, mappedBy: 'user')]
+    private Collection $heureMaintenance;
+
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
         $this->UpdatedAt = new \DateTimeImmutable();
+        $this->heureMaintenance = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -198,6 +204,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUserCredit(int $user_credit): static
     {
         $this->user_credit = $user_credit;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, HistoriqueMaintenance>
+     */
+    public function getHeureMaintenance(): Collection
+    {
+        return $this->heureMaintenance;
+    }
+
+    public function addHeureMaintenance(HistoriqueMaintenance $heureMaintenance): static
+    {
+        if (!$this->heureMaintenance->contains($heureMaintenance)) {
+            $this->heureMaintenance->add($heureMaintenance);
+            $heureMaintenance->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHeureMaintenance(HistoriqueMaintenance $heureMaintenance): static
+    {
+        if ($this->heureMaintenance->removeElement($heureMaintenance)) {
+            // set the owning side to null (unless already changed)
+            if ($heureMaintenance->getUser() === $this) {
+                $heureMaintenance->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -42,6 +42,7 @@
                                     {% if is_granted('ROLE_ADMIN') %}
                                     <a class="dropdown-item" href="{{path('machines.index', {id: app.user.id})}}">Liste des machines</a>
                                     <a class="dropdown-item" href="{{path('user.index')}}">Liste des utilisateurs</a>
+                                    <a class="dropdown-item" href="{{path('historique.maintenance')}}">Historique maintenance</a>
                                     {% endif %}
                                     <a class="dropdown-item" href="{{path('security.logout')}}">Déconnexion</a>
                                 </div>
